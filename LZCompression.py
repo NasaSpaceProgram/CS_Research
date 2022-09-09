@@ -45,6 +45,29 @@ def lzDecoder(lst):
         dic[len(dic)] = dec
     return(oupt)
 
+
+
+def zipper(s1,s2):
+    oupt = ""
+    i = 0
+    while i < len(s1):
+        oupt = oupt + s1[i]
+        if i <len(S2):
+            oupt = oupt + s2[i]
+        i ++
+    while i< len(s2):
+        oupt = oupt + s2[i]
+        i ++
+    return(oupt)
+
+def lzCompression_ratio(s):
+    return(len(lzEndoder(s))/len(s))
+
+def Mutual_Compression_ratio(s1,s2)
+    s12 = zipper(s1,s2)
+    return(lzCompression_ratio(s1)+lzCompression_ratio(s2)-lzCompression_ratio(s12))
+    
+
 s = "AABABBABBAABA"
 enc = lzEndoder(s)
 print("Length of string:" + str(len(s)))
