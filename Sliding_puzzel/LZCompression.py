@@ -141,14 +141,14 @@ def Mutual_Compression_Crossed(s1,s2):
 
 #s1 = "101000101101111111000011011100011001010001010000101111000110"
 #s2 = "001010101110000100000111110000100001111000001110000111000100"
-s1 = randomBinary(100)
+#s1 = randomBinary(100)
 #s2 = randomBinary(100)
-s2 = s1
-print(lzCompression_ratio(s1))
-print(lzCompression_ratio(s2))
+#s2 = s1
+#print(lzCompression_ratio(s1))
+#print(lzCompression_ratio(s2))
 #s12 = zipper(s1,s2)
 #print(lzCompression_ratio(s12))
-print(Mutual_Compression_ratio(s1,s2))
+#print(Mutual_Compression_ratio(s1,s2))
 
 
 

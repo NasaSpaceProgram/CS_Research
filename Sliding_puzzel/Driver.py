@@ -1,15 +1,20 @@
 # This entire file will need to be changed. 
+
+
+
+
+
 from EightPuzzle import *
 from UniformCostSearch import *
 from AStarSearch import *
 # create the problem model
-# eight_puzzle = EightPuzzle((1, 2, 3, 4, 5, 6, 0, 7, 8))  # requires 2 moves
+# eight_puzzle = SlidingPuzzle(3,3,(1, 2, 3, 4, 5, 6, 0, 7, 8))  # requires 2 moves
 
 # other examples of creating an 8-puzzle problem
-#eight_puzzle = EightPuzzle((1, 2, 3, 4, 5, 7, 8, 6, 0)) #requires 12 moves
-eight_puzzle = EightPuzzle((2, 3, 1, 8, 0, 6, 5, 7, 4)) # requires 24 moves
+#eight_puzzle = SlidingPuzzle(3,3,(1, 2, 3, 4, 5, 7, 8, 6, 0)) #requires 12 moves
+eight_puzzle = SlidingPuzzle(3,3,(2, 3, 1, 8, 0, 6, 5, 7, 4)) # requires 24 moves
 
-# eight_puzzle = EightPuzzle((1, 2, 3, 4, 5, 6, 7, 8, 0)) #start with solution
+# eight_puzzle = SlidingPuzzle(3,3,(1, 2, 3, 4, 5, 6, 7, 8, 0)) #start with solution
 # eight_puzzle.shuffle(200) # make moves to ensure the puzzle is in a solvable state, but mixed up a bit
 
 
