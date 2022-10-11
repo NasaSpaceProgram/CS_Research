@@ -2,6 +2,7 @@
 from Problem import *
 from math import *
 from LZCompression import *
+from random import randrange 
 
 def makeBinary(n,l):
     """returns a string representing an integer in binary"""
@@ -114,19 +115,22 @@ class SlidingPuzzle(Problem):
         self.initial = state
 
 
+    #def h(self, state):
+    #    """ hueristic cost # of out of place squares"""
+    #    #ToDo: Implement this function to return a hueristic cost for the state
+    #    count = 0
+    #    for i in range(len(state)):
+    #        if state[i] != self.goal[i]:
+    #            count = count + 1
+    #    return count
+
     def h(self, state):
-        """ hueristic cost # of out of place squares"""
-        #ToDo: Implement this function to return a hueristic cost for the state
-        count = 0
-        for i in range(len(state)):
-            if state[i] != self.goal[i]:
-                count = count + 1
-        return count
+        return(randrange(0,100))
     
     def h1(self, state):
         BinaryState = StateToBinary(state, self.BinaryLength)
-        compression = Mutual_Compression_ratio(self.BinaryGoal,BinaryState) #worse than uniform 135957
-        #compression = Mutual_Compression_Crossed(self.BinaryGoal,BinaryState) # worse than uniform 147376
+        #compression = Mutual_Compression_ratio(self.BinaryGoal,BinaryState) #worse than uniform 135957
+        compression = 1-Mutual_Compression_Crossed(self.BinaryGoal,BinaryState) # worse than uniform 147376
         return((compression)*100)
 
 
