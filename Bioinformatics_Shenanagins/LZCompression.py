@@ -1,4 +1,5 @@
 from math import floor, log2
+
 from random import randrange
 def randomBinary(n):
     oupt = ""
@@ -141,12 +142,12 @@ def zipper(s1,s2):
         oupt = oupt + s2[i]
         i = i+ 1
     return(oupt)
-def zipper(s1,s2):
-    """Binary Zipper"""
-    oupt = ""
-    for i in range(len(s1)):
-        oupt += str(int(s1[i])*1 + int(s2[i])*2)
-    return(oupt)
+#def zipper(s1,s2):
+#    """Binary Zipper"""
+#    oupt = ""
+#    for i in range(len(s1)):
+#        oupt += str(int(s1[i])*1 + int(s2[i])*2)
+#    return(oupt)
 
 def lzCompression_ratio(s):
     return(len("".join(lzEncoder(s)))/len(s))
