@@ -141,7 +141,7 @@ def zipper(s1,s2):
         oupt = oupt + s2[i]
         i = i+ 1
     return(oupt)
-def zipper(s1,s2):
+#def zipper(s1,s2):
     """Binary Zipper"""
     oupt = ""
     for i in range(len(s1)):
@@ -151,8 +151,6 @@ def zipper(s1,s2):
 def lzCompression_ratio(s):
     return(len("".join(lzEncoder(s)))/len(s))
 
-def lzCompression_ratio_Binary(s):
-    return(len("".join(lzEncoder2(s,{})[0]))/len(s))
 
 def Mutual_Compression_ratio(s1,s2, zip = False):
     if zip:
