@@ -146,12 +146,14 @@ def ConditiononalCompression_tests(n, startLen, EndLen):
     add_amount = (EndLen-startLen)//n
     if add_amount<1:
         add_amount = 1
-    f.write("length of strings, compression ratio of s1, compression ratio of s2, Conditional_Comrpession(s1 s2), Conditional_Comrpession(s2 s1), Conditional_Comrpession(s1 0s), Conditional_Comrpession(s2 0s), s1, s2 \n")
+    f.write("length of strings, compression ratio of s1, compression ratio of s2, Conditional_Comrpession(s1 s1), Conditional_Comrpession(s2 s2), Conditional_Comrpession(s1 s2), Conditional_Comrpession(s2 s1), Conditional_Comrpession(s1 0s), Conditional_Comrpession(s2 0s), s1, s2 \n")
     for i in range(n):
         oupt = []
         oupt.append(str(len(s1)))
         oupt.append(str(lzCompression_ratio(s1)))
         oupt.append(str(lzCompression_ratio(s2)))
+        oupt.append(str(Conditional_Comrpession(s1,s1)))
+        oupt.append(str(Conditional_Comrpession(s2,s2)))
         oupt.append(str(Conditional_Comrpession(s1,s2)))
         oupt.append(str(Conditional_Comrpession(s2,s1)))
         oupt.append(str(Conditional_Comrpession(s1,"0"*len(s1))))

@@ -1,11 +1,25 @@
 from math import floor, log2
 from itertools import permutations, combinations
-from random import randrange
+from random import randrange, random
 def randomBinary(n):
     oupt = ""
     for i in range(n):
         oupt += str(randrange(0,2))
     return(oupt)
+
+
+def randomBinary_prob(n,p):
+    oupt = ""
+    for i in range(n):
+        s = random()
+        if s <= p:
+            oupt += "0"
+        else:
+            oupt += "1"
+    return(oupt)
+
+#print(randomBinary_prob(10,0.9))
+
 def makeBinary_fixed(n,l):
     """returns a string representing an integer in binary"""
     rem = n
@@ -215,7 +229,7 @@ def Mutual_Compression_Crossed(s1,s2):
         (len("".join(s1Encoded2)) + len("".join(s2Encoded2)))/(len(s1))# try deviding by n instead of 2n
     )
 
-def Conditional_Comrpession(s1,s2):
+def Conditional_Comrpession(s2,s1):
     (s1Encoded,s1Dic) = lzEncoder(s1, output_dictionary = True)
     (s12Encoded,s12Dic) = lzEncoder(s2, input_dictionary = s1Dic, output_dictionary = True)
     return(len("".join(s12Encoded))/ len(s1))
@@ -259,7 +273,7 @@ def K_BalancedAphabet(k):
         
     return(oupt)
 
-#print(K_BalancedAphabet(4))
+#print(K_BalancedAphabet(1))
 
 def SigCHAMP(alp,n):
     oupt = ""
@@ -273,10 +287,12 @@ def SigCHAMP(alp,n):
         oupt += "".join(com)
         i +=1
     return(oupt[:n])
-
-#print(SigCHAMP(K_BalancedAphabet(3),100000))
-
-
+s1 = randomBinary_prob(800000,0.9)
+print(Conditional_Comrpession(s1,s1))
+#print(lzCompression_ratio(randomBinary_prob(800000,0.9), ia = [0,1]))
+#print(SigCHAMP(K_BalancedAphabet(2),1000))
+#s1 = SigCHAMP(K_BalancedAphabet(1),1000)
+#print(lzCompression_ratio(s1, ia = [0,1]))
 #s = CHAMP(100000)
 #s2 = doubelString(s)
 #s = "0"*100
@@ -289,3 +305,8 @@ def SigCHAMP(alp,n):
 
 #(u,w) = CHAMP2(1000000)
 #print(Mutual_Compression_Crossed2(u,w))
+
+#s1 = s2 = "0"*100000
+#print(Conditional_Comrpession(s1,s2))
+# for next week find plagerisum detection shenangins 
+# dynamic programming way of 
