@@ -273,26 +273,35 @@ def K_BalancedAphabet(k):
         
     return(oupt)
 
-#print(K_BalancedAphabet(1))
+#print(K_BalancedAphabet(4))
+
+def SigCHAMP_helper(alp,n,oupt="", lastjoin = []):
+    newjoin = []
+    for i in lastjoin:
+        for j in alp:
+            nw = i+j
+            oupt += nw
+            #print(oupt)
+            if len(oupt) >= n:
+                return(oupt)
+            newjoin.append(nw)
+    oupt = SigCHAMP_helper(alp,n,oupt = oupt, lastjoin = newjoin)
+    return(oupt)
 
 def SigCHAMP(alp,n):
-    oupt = ""
-    i = 1
-    while len(oupt) <= n:
-        com = []
-        for j in  list(permutations(alp+alp, i)):
-            jn = "".join(j)
-            if jn not in com:
-                com.append(jn)
-        oupt += "".join(com)
-        i +=1
+    oupt=""
+    oupt += "".join(alp)
+    if len(oupt) >= n:
+        return(oupt[:n])
+    else:
+        oupt = SigCHAMP_helper(alp,n,oupt=oupt, lastjoin = alp)
     return(oupt[:n])
-s1 = randomBinary_prob(800000,0.9)
-print(Conditional_Comrpession(s1,s1))
+#s1 = randomBinary_prob(800000,0.9)
+#print(Conditional_Comrpession(s1,s1))
 #print(lzCompression_ratio(randomBinary_prob(800000,0.9), ia = [0,1]))
-#print(SigCHAMP(K_BalancedAphabet(2),1000))
-#s1 = SigCHAMP(K_BalancedAphabet(1),1000)
-#print(lzCompression_ratio(s1, ia = [0,1]))
+#print(SigCHAMP(K_BalancedAphabet(1),10000))
+s1 = SigCHAMP(K_BalancedAphabet(1),1000000)
+print(lzCompression_ratio(s1, ia = [0,1]))
 #s = CHAMP(100000)
 #s2 = doubelString(s)
 #s = "0"*100
