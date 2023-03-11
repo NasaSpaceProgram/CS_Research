@@ -1,7 +1,21 @@
 from math import floor, log2
 from itertools import permutations, combinations
 from random import randrange, random
+
+def makeBinary_fixed(n,l):
+    """returns a string representing an integer in binary"""
+    rem = n
+    oupt = ""
+    for i in range(l):
+        #print(2**(l-i-1))
+        if rem >= 2**(l-i-1):
+            oupt += "1"
+            rem -= 2**(l-i-1)
+        else:
+            oupt += "0"
+    return(oupt)
 def randomBinary(n):
+    """Returns random binary string of length n"""
     oupt = ""
     for i in range(n):
         oupt += str(randrange(0,2))
@@ -9,6 +23,7 @@ def randomBinary(n):
 
 
 def randomBinary_prob(n,p):
+    """Returns random binary string of length n and probiblity p that each charicter will be a zero"""
     oupt = ""
     for i in range(n):
         s = random()
@@ -50,6 +65,7 @@ def makeQuatrinary_fixed(n,l):
     return(oupt)
 
 def makeBinary(n):
+    """returns binary string representation of n"""
     if n == 0:
         return("0")
     l = floor(log2(n)) + 1 
@@ -63,7 +79,9 @@ def makeBinary(n):
             oupt += "0"
 
     return(oupt)
+
 def length_for_binary(n):
+    """retunrs the lenght a binary string would need to be to encode the number n"""
     if log2(n) % 1 == 0:
         return(floor(log2(n)))
     else:
@@ -214,8 +232,7 @@ def Mutual_Compression_ratio1(s1,s2):
     ia = [0,1]
     return(lzCompression_ratio(s1, ia = ia)+lzCompression_ratio(s2, ia= ia)-Conditional_Comrpession(s1,s2))
 
-def Mutual_Compression_ratio2(s1,s2):
-    return(lzCompression_ratio(s2)-Conditional_Comrpession((s1,s2)))
+
 
 
 def Mutual_Compression_Crossed(s1,s2):
@@ -226,13 +243,21 @@ def Mutual_Compression_Crossed(s1,s2):
     (s2Encoded2,s2Dic2) = lzEncoder(s2, input_alphabet = [0,1], input_dictionary = s1Dic, output_dictionary = True)
 
     return(
-        (len("".join(s1Encoded2)) + len("".join(s2Encoded2)))/(len(s1))# try deviding by n instead of 2n
+        (len("".join(s1Encoded2)) + len("".join(s2Encoded2)))/(len(s1)+len(s2))# try deviding by n instead of 2n
     )
+
+def Mutual_Compression_ratio_Crossed(s1,s2):
+    ia = [0,1]
+    return(lzCompression_ratio(s1, ia = ia)+lzCompression_ratio(s2, ia= ia)-Mutual_Compression_Crossed(s1,s2))
 
 def Conditional_Comrpession(s2,s1):
     (s1Encoded,s1Dic) = lzEncoder(s1, output_dictionary = True)
     (s12Encoded,s12Dic) = lzEncoder(s2, input_dictionary = s1Dic, output_dictionary = True)
     return(len("".join(s12Encoded))/ len(s1))
+
+
+def Mutual_Compression_ratio2(s1,s2):
+    return(lzCompression_ratio(s2)-Conditional_Comrpession(s1,s2))
 
 
 """A = ["#","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W", "X", "Y","Z"]
@@ -273,7 +298,15 @@ def K_BalancedAphabet(k):
         
     return(oupt)
 
-#print(K_BalancedAphabet(4))
+
+
+        
+
+
+
+#def WorstPossible(n):
+    
+    
 
 def SigCHAMP_helper(alp,n,oupt="", lastjoin = []):
     newjoin = []
@@ -296,21 +329,28 @@ def SigCHAMP(alp,n):
     else:
         oupt = SigCHAMP_helper(alp,n,oupt=oupt, lastjoin = alp)
     return(oupt[:n])
-#s1 = randomBinary_prob(800000,0.9)
-#print(Conditional_Comrpession(s1,s1))
-#print(lzCompression_ratio(randomBinary_prob(800000,0.9), ia = [0,1]))
+
+
+
+
+#s1 = "Title: The Last StandAct I: The USS Enterprise is on a routine mission to explore a remote planet when they detect a distress signal coming from a nearby starbase. The crew responds to the call and finds that the starbase is under attack by a group of hostile aliens. Captain Kirk and the landing party beam down to assess the situation and plan a strategy to defend the starbase.Act II:As the crew fights off the invading aliens, they discover that the enemy is not just trying to conquer the starbase, but is seeking to destroy it completely. The crew realizes that this attack is part of a larger campaign by the alien race to eradicate all human colonies in the sector. Captain Kirk and his crew must not only defend the starbase but also protect the lives of the civilians who have taken refuge there.Act III:The crew works to fortify the starbase and prepare for the next wave of the enemy's attack. The tension mounts as the crew faces a seemingly insurmountable challenge. As the battle rages on, Captain Kirk orders his crew to hold their ground and protect the starbase at all costs."
+
+
+
+#print(lzCompression_ratio(randomBinary_prob(100000,0.5), ia = [0,1]))
 #print(SigCHAMP(K_BalancedAphabet(1),10000))
-s1 = SigCHAMP(K_BalancedAphabet(1),1000000)
-print(lzCompression_ratio(s1, ia = [0,1]))
+#s1 = SigCHAMP(K_BalancedAphabet(1),1000000)
+#s1 = "0"*10000000
+#print(lzCompression_ratio(s1, ia = [0,1]))
 #s = CHAMP(100000)
 #s2 = doubelString(s)
 #s = "0"*100
 #s = "10" * 10000
 #print(lzCompression_ratio(s2))
 #print(Mutual_Compression_Crossed2(s2,s2))
-
+#s1 = CHAMP(1000000)
 #print(lzCompression_ratio("00011011"*1000))
-
+#print(Conditional_Comrpession(s1,"0"*100000))
 
 #(u,w) = CHAMP2(1000000)
 #print(Mutual_Compression_Crossed2(u,w))
@@ -319,3 +359,122 @@ print(lzCompression_ratio(s1, ia = [0,1]))
 #print(Conditional_Comrpession(s1,s2))
 # for next week find plagerisum detection shenangins 
 # dynamic programming way of 
+def Worst(n):
+    s = ""
+    l = 2
+    i = 0
+    while len(s)<n:
+        s += makeBinary_fixed(i,l)
+        if i == 2**l-1:
+            i = 0
+            l += 1
+        else:
+            i+=1
+    return(s[:n])
+def GetPossible(l, ls =[""], i=0,):
+    if i == l:
+        return(ls)
+    else:
+        new_ls = []
+        for j in ls:
+            new_ls.append(j+"0")
+            new_ls.append(j+"1")
+        
+        return(GetPossible(l, ls = new_ls, i = i+1,))
+    
+
+    
+
+
+    
+def endsWith(o, lst):
+    for i in range(len(lst)):
+        if lst[i][-1] == o:
+            return(lst.pop(i))
+        
+
+
+"""def WorstRatio(n):
+    l = 2:
+    while i <= n:"""
+
+
+
+
+def Worst2(n):
+    s = "00110"
+    l = 3
+    
+    while len(s)<n:
+        possible =GetPossible(l)
+        sw0 = possible[:(len(possible)//2)]
+        sw1 = possible[(len(possible)//2):]
+        
+        i = 0
+        while len(s)<n:
+            if s[-1] == "0":
+                if len(sw0) > len(sw1):
+                    s += endsWith("0", sw0)[1:]
+                else:
+                    s += endsWith("1", sw0)[1:]
+            else:
+                if len(sw1) > len(sw0):
+                    s += endsWith("1", sw1)[1:]
+                else:
+                    s += endsWith("0", sw1)[1:]
+            #print(s[-l-1:-1])
+            if len(sw0) == 0 and len(sw1) == 0:
+                l += 1
+                break
+            
+            
+        
+    return(s[:n])
+
+
+def Worst3(n):
+    s = "00110"
+    l = 3
+    
+    while len(s)<n:
+        possible =GetPossible(l)
+        sw0 = possible[:(len(possible)//2)]
+        sw1 = possible[(len(possible)//2):]
+        
+        i = 0
+        while len(s)<n:
+            s += sw0[1+2*i][1:]+sw1[1+2*i][1:]+sw0[2*i][1:]+sw1[2*i][1:]
+            i+=1
+            if i > 2**(l-2)-1:
+                l += 1
+                break
+    return(s[:n])
+
+
+def Worst4(n):
+    s = "0"
+    l = 2
+    
+    while len(s)<n:
+        possible =GetPossible(l)
+        sw0 = possible[:(len(possible)//2)]
+        sw1 = possible[(len(possible)//2):]
+        
+        i = 0
+        while len(s)<n:
+            s += sw0[1+2*i][1:]+sw1[1+2*i][1:]+sw0[2*i][1:]+sw1[2*i][1:]
+            i+=1
+            if i > 2**(l-2)-1:
+                l += 1
+                break
+    return(s[:n])
+
+print(Worst4(5),Worst3(5))
+
+
+"""f = open("worst.csv", "w")
+for n in range(1,1000):
+    (enc,dic)=lzEncoder(Worst2(n),output_dictionary=True)
+    f.write(",".join([str(lzCompression_ratio(Worst3(n))),str(lzCompression_ratio(Worst4(n))),str(len(dic["0"])),str(len(dic))])+ "\n")
+
+f.close()"""
