@@ -175,7 +175,7 @@ def lzEncoder(s, input_alphabet = [0,1], input_dictionary = False, output_dictio
         return(oupt[1:])
     else:
         return(oupt[1:],dic)
-
+    
 
 
 
@@ -196,17 +196,17 @@ def lzDecoder(lst):
 
 
 #def zipper(s1,s2):
-    oupt = ""
-    i = 0
-    while i < len(s1):
-        oupt = oupt + s1[i]
-        if i <len(s2):
-            oupt = oupt + s2[i]
-        i = i+ 1
-    while i< len(s2):
-        oupt = oupt + s2[i]
-        i = i+ 1
-    return(oupt)
+    # oupt = ""
+    # i = 0
+    # while i < len(s1):
+    #     oupt = oupt + s1[i]
+    #     if i <len(s2):
+    #         oupt = oupt + s2[i]
+    #     i = i+ 1
+    # while i< len(s2):
+    #     oupt = oupt + s2[i]
+    #     i = i+ 1
+    # return(oupt)
 def zipper(s1,s2):
     """Binary Zipper"""
     oupt = ""
@@ -469,12 +469,3 @@ def Worst4(n):
                 break
     return(s[:n])
 
-print(Worst4(5),Worst3(5))
-
-
-"""f = open("worst.csv", "w")
-for n in range(1,1000):
-    (enc,dic)=lzEncoder(Worst2(n),output_dictionary=True)
-    f.write(",".join([str(lzCompression_ratio(Worst3(n))),str(lzCompression_ratio(Worst4(n))),str(len(dic["0"])),str(len(dic))])+ "\n")
-
-f.close()"""
