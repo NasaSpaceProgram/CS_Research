@@ -379,8 +379,7 @@ def GetPossible(l, ls =[""], i=0,):
         for j in ls:
             new_ls.append(j+"0")
             new_ls.append(j+"1")
-        
-        return(GetPossible(l, ls = new_ls, i = i+1,))
+        return(GetPossible(l, ls = new_ls, i = i+1))
     
 
     
@@ -454,7 +453,6 @@ def Worst3(n):
 def Worst4(n):
     s = "0"
     l = 2
-    
     while len(s)<n:
         possible =GetPossible(l)
         sw0 = possible[:(len(possible)//2)]

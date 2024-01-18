@@ -1,15 +1,22 @@
 from math import floor, log2
-def lzEncoder(s, input_alphabet = [0,1]):
-    """ s = input string
-        input_aplhabet = alphabet used for sting s, defalted to binary
-        Takes in encoded string S and outputs decoded sring"""
+def lzEncoder(s, input_alphabet = [0,1], input_dictionary = False, output_dictionary = False):
+    """ Takes in string string s and encodes it into a list of strings
+        s = input string
+        input_aplhabet = list containing all elements of the alphabet used to begin encoding sting s
+        input_dictionary = dictionary: used to secify input dictionary if it would be 
+                          different from the one created by the inital alphabet
+        output_dictionary = Boolian value: if true will output a tuple with the encoding 
+                            and the dictionary, else will just output the encoding
+    """
     encode_length = length_for_binary(len(input_alphabet)) # set the inital encoding lenght to accomidate the inital alphabet
-
-    dic = MakeBinaryDictionary(input_alphabet) # make the inital dictionary using the inital alphabet
+    if not input_dictionary: # make the inital dictionary using the inital alphabet
+        dic = MakeBinaryDictionary(input_alphabet)
+    else:
+        dic = input_dictionary
 
     oupt = [dic[s[0]]] # inital encoding must be what we initaly have in the dictionary for the first charicter in s
     i=1
-    curr = s[0] #current string which we are looking at
+    curr = s[0] #current charicter which we are looking at
     while i < len(s):
         old = curr 
         curr += s[i]
@@ -29,7 +36,10 @@ def lzEncoder(s, input_alphabet = [0,1]):
         i +=1
 
     oupt.append(dic[curr])# retreve the last part of the sequence
-    return(oupt[1:])
+    if output_dictionary:
+        return(oupt[1:],dic)
+    else:
+        return(oupt[1:])
 
 
 
@@ -76,10 +86,6 @@ def makeBinary_fixed(n,l):
         else:
             oupt += "0"
     return(oupt)
-
-
-
-
     
 def LZDecoderhelper(dictionary_Length,s,dic,encode_length,oupt = ""):
     if len(s) == encode_length:
@@ -119,22 +125,15 @@ def LZDecoder(s, input_alphabet = [0,1]):
 def LZExample(s , ia = [0,1]):
     print("==================")
     print("String to Encode: "+s)
-    l1 = lzEncoder(s,input_alphabet=ia)
+    (l1,D) = lzEncoder(s,input_alphabet=ia,output_dictionary =True)
     print("Encoding List: "+str(l1))
     print("Encoding: "+"".join(l1))
     print("Decoded String:   "+LZDecoder("".join(l1), input_alphabet = ia))
-
-
-
-
-#print(s)
-#
-#print(l1)
-
+    print(f"Dictionary:{D}")
 
 LZExample("000000")
 
 LZExample("0100011011")
-
-LZExample('TOBEORNOTTOBEORTOBEORNOT',ia=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
+# see https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch for more detaled explination of this one
+LZExample('TOBEORNOTTOBEORTOBEORNOT',ia=["#","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
 

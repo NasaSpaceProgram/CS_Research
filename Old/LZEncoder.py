@@ -161,21 +161,3 @@ def LZDecoder(s, input_alphabet = [0,1]):
     
 
 
-s = 'TOBEORNOTTOBEORTOBEORNOT#'
-#print(s)
-#l1 = lzEncoderAdvanced(s,input_alphabet=["#","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
-#print(l1)
-
-
-s = '000000'
-print(s)
-l1 = lzEncoderAdvanced(s)
-print(l1)
-print(LZDecoder("".join(l1)))
-
-s2 = '001000'
-print(s2)
-l2 = lzEncoderAdvanced(s2)
-print(l2)
-print(LZDecoder("".join(l2)))
-
